@@ -1,14 +1,7 @@
-function httpGetAsync(theUrl, callback){
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            callback(xmlHttp.responseText);
-        }
-    xmlHttp.open("GET", theUrl, true);
-    xmlHttp.send(null);
-}
-
-
-function attachListeners(){
-  document.getElementByID('getButton').addEventListener('click',httpGetAsync);
-}
+$.getJSON("http://ip-api.com/json/?callback=?", function(data) {
+    var table_body = "";
+    $.each(data, function(k, v) {
+	table_body += "<tr><td>" + k + "</td><td><b>" + v + "</b></td></tr>";
+    });
+    $("#GeoResults").html(table_body);
+});
