@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-        <title>IP-API.com Geo Location Demo</title>
-    </head>
-    <body>
-      <h2>
-        Status: <code id="statusField">NO-STATUS</code>
-      </h2>
-      <script>
-      
-          function attachListeners() {
-            document.getElementById('getButton').addEventListener('click', httpGet());
-          }
+  <head>
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+      <title>IP-API.com Geo Location Demo</title>
+  </head>
+  <body>
+    <h2>
+      Status: <code id="statusField">NO-STATUS</code>
+    </h2>
+    <script>
+function httpGet(event) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", "http://ip-api.com/json", false ); // false for synchronous request
+  xmlHttp.send( null );
 
-          function httpGet()
-            {
-              var xmlHttp = new XMLHttpRequest();
-              xmlHttp.open( "GET", "http://ip-api.com/json", false ); // false for synchronous request
-              xmlHttp.send( null );
-
-              var statusField = document.getElementbyID("statusField");
-              statusField.innerHTML = xmlHttp.responseText;
-              return xmlHttp.responseText;
-            }
+  var statusField = document.getElementbyID("statusField");
+  return xmlHttp.responseText;
+}
+document.getElementById('getButton').addEventListener('click', httpGet);
       </script>
-      <button type = 'button' id="getButton"> Get </button>
-    </body>
+    <button type="button" id="getButton"> Get </button>
+  </body>
 </html>
