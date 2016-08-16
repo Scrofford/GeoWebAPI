@@ -3,9 +3,28 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
         <title>IP-API.com Geo Location Demo</title>
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
     </head>
     <body>
-        <table id="GeoResults"></table>
+      <h2>
+        Status: <code id="statusField">NO-STATUS</code>
+      </h2>
+      <script>
+      
+          function attachListeners() {
+            document.getElementById('getButton').addEventListener('click', httpGet());
+          }
+
+          function httpGet()
+            {
+              var xmlHttp = new XMLHttpRequest();
+              xmlHttp.open( "GET", "http://ip-api.com/json", false ); // false for synchronous request
+              xmlHttp.send( null );
+
+              var statusField = document.getElementbyID("statusField");
+              statusField.innerHTML = xmlHttp.responseText;
+              return xmlHttp.responseText;
+            }
+      </script>
+      <button type = 'button' id="getButton"> Get </button>
     </body>
 </html>
