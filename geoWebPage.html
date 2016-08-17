@@ -23,8 +23,8 @@
   <h4>status: <code id="statusField">""</code></h4>
   <h4>timezone: <code id="timezoneField">""</code></h4>
   <h4>zip: <code id="zipField">""</code></h4>
-<script>
 
+<script>
 var xmlHttp = new XMLHttpRequest();
 function httpGet(event) {
   xmlHttp.open( "GET", "http://ip-api.com/json", true ); // false for synchronous request
@@ -64,11 +64,13 @@ function processRequest(e) {
     timezoneField.innerHTML = response.timezone;
     var zipField = document.getElementById('zipField');
     zipField.innerHTML = response.zip;
+    var overallStatusField = document.getElementById('overallStatusField');
+    overallStatusField.innerHTML = 'Success'
   }
 }
 
 document.getElementById('getButton').addEventListener('click', httpGet);
 xmlHttp.addEventListener("readystatechange", processRequest, false);
-    </script>
-  </body>
+</script>
+</body>
 </html>
