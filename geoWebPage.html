@@ -1,20 +1,76 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-        <title>IP-API.com Geo Location Demo</title>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    </head>
-    <body>
-        <table id="GeoResults"></table>
-        <script>
-        $.getJSON("http://ip-api.com/json/?callback=?", function(data) {
-            var table_body = "";
-            $.each(data, function(k, v) {
-                table_body += "<tr><td>" + k + "</td><td><b>" + v + "</b></td></tr>";
-            });
-            $("#GeoResults").html(table_body);
-        });
-        </script>
-    </body>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <title>IP-API.com Geo Location Demo</title>
+</head>
+<body>
+  <h2>
+    Status: <code id="overallStatusField">NO-STATUS</code>
+  </h2>
+  <button type="button" id="getButton"> Get </button>
+  <h4>as: <code id="asField">""</code></h4>
+  <h4>city: <code id="cityField">""</code></h4>
+  <h4>country: <code id="countryField">""</code></h4>
+  <h4>countryCode: <code id="countryCodeField">""</code></h4>
+  <h4>isp: <code id="ispField">""</code></h4>
+  <h4>lat: <code id="latField">""</code></h4>
+  <h4>lon: <code id="lonField">""</code></h4>
+  <h4>org: <code id="orgField">""</code></h4>
+  <h4>query: <code id="queryField">""</code></h4>
+  <h4>region: <code id="regionField">""</code></h4>
+  <h4>regionName: <code id="regionNameField">""</code></h4>
+  <h4>status: <code id="statusField">""</code></h4>
+  <h4>timezone: <code id="timezoneField">""</code></h4>
+  <h4>zip: <code id="zipField">""</code></h4>
+
+<script>
+var xmlHttp = new XMLHttpRequest();
+function httpGet(event) {
+  xmlHttp.open( "GET", "http://ip-api.com/json", true ); // false for synchronous request
+  xmlHttp.send();
+  return xmlHttp.responseText;
+}
+
+function processRequest(e) {
+  if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+    var response = JSON.parse(xmlHttp.responseText);
+
+    var asField = document.getElementById('asField');
+    asField.innerHTML = response.as;
+    var cityField = document.getElementById('cityField');
+    cityField.innerHTML = response.city;
+    var countryField = document.getElementById('countryField');
+    countryField.innerHTML = response.country;
+    var countryCodeField = document.getElementById('countryCodeField');
+    countryCodeField.innerHTML = response.countryCode;
+    var ispField = document.getElementById('ispField');
+    ispField.innerHTML = response.isp;
+    var latField = document.getElementById('latField');
+    latField.innerHTML = response.lat;
+    var lonField = document.getElementById('lonField');
+    lonField.innerHTML = response.lon;
+    var orgField = document.getElementById('orgField');
+    orgField.innerHTML = response.org;
+    var queryField = document.getElementById('queryField');
+    queryField.innerHTML = response.query;
+    var regionField = document.getElementById('regionField');
+    regionField.innerHTML = response.region;
+    var regionNameField = document.getElementById('regionNameField');
+    regionNameField.innerHTML = response.regionName;
+    var statusField = document.getElementById('statusField');
+    statusField.innerHTML = response.status;
+    var timezoneField = document.getElementById('timezoneField');
+    timezoneField.innerHTML = response.timezone;
+    var zipField = document.getElementById('zipField');
+    zipField.innerHTML = response.zip;
+    var overallStatusField = document.getElementById('overallStatusField');
+    overallStatusField.innerHTML = 'Success'
+  }
+}
+
+document.getElementById('getButton').addEventListener('click', httpGet);
+xmlHttp.addEventListener("readystatechange", processRequest, false);
+</script>
+</body>
 </html>

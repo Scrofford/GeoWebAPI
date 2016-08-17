@@ -1,2 +1,2 @@
-# GeoWebAPI
-Creating a web page that consumes API data
+Goal is to consume data provided by the API at
+http://ip-api.com/
