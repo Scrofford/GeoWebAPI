@@ -1,24 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
-      <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-      <title>IP-API.com Geo Location Demo</title>
-  </head>
-  <body>
-    <h2>
-      Status: <code id="statusField">NO-STATUS</code>
-    </h2>
-    <script>
-function httpGet(event) {
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open( "GET", "http://ip-api.com/json", false ); // false for synchronous request
-  xmlHttp.send( null );
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <title>IP-API.com Geo Location Demo</title>
+</head>
+<body>
+  <h2>
+    Status: <code id="statusField">NO-STATUS</code>
+  </h2>
+  <button type="button" id="getButton"> Get </button>
+  <h4>as: <code id="asField">""</code></h4>
+  <h4>city: <code id="cityField">""</code></h4>
+  <h4>country: <code id="countryField">""</code></h4>
+  <h4>countryCode: <code id="countryCodeField">""</code></h4>
+  <h4>isp: <code id="ispField">""</code></h4>
+  <h4>lat: <code id="as">""</code></h4>
+  <h4>lon: <code id="as">""</code></h4>
+  <h4>org: <code id="as">""</code></h4>
+  <h4>query: <code id="as">""</code></h4>
+  <h4>region: <code id="as">""</code></h4>
+  <h4>regionName: <code id="as">""</code></h4>
+  <h4>status: <code id="as">""</code></h4>
+  <h4>timezone: <code id="as">""</code></h4>
+  <h4>zip: <code id="as">""</code></h4>
+<script>
 
-  var statusField = document.getElementbyID("statusField");
+var xmlHttp = new XMLHttpRequest();
+function httpGet(event) {
+  xmlHttp.open( "GET", "http://ip-api.com/json", true ); // false for synchronous request
+  xmlHttp.send();
   return xmlHttp.responseText;
 }
+
+function processRequest(e) {
+  if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+    var response = JSON.parse(xmlHttp.responseText);
+    var asField = document.getElementById('asField');
+    asField.innerHTML = response.as;
+    var cityField = document.getElementById('cityField');
+    cityField.innerHTML = response.city;
+    var countryField = document.getElementById('countryField');
+    countryField.innerHTML = response.country;
+    var countryCodeField = document.getElementById('countryCodeField');
+    countryCodeField.innerHTML = response.countryCode;
+    var ispField = document.getElementById('ispField');
+    ispField.innerHTML = response.isp;
+
+  }
+}
+
 document.getElementById('getButton').addEventListener('click', httpGet);
-      </script>
-    <button type="button" id="getButton"> Get </button>
+xmlHttp.addEventListener("readystatechange", processRequest, false);
+    </script>
   </body>
 </html>
