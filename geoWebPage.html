@@ -6,7 +6,7 @@
 </head>
 <body>
   <h2>
-    Status: <code id="statusField">NO-STATUS</code>
+    Status: <code id="overallStatusField">NO-STATUS</code>
   </h2>
   <button type="button" id="getButton"> Get </button>
   <h4>as: <code id="asField">""</code></h4>
@@ -14,15 +14,15 @@
   <h4>country: <code id="countryField">""</code></h4>
   <h4>countryCode: <code id="countryCodeField">""</code></h4>
   <h4>isp: <code id="ispField">""</code></h4>
-  <h4>lat: <code id="as">""</code></h4>
-  <h4>lon: <code id="as">""</code></h4>
-  <h4>org: <code id="as">""</code></h4>
-  <h4>query: <code id="as">""</code></h4>
-  <h4>region: <code id="as">""</code></h4>
-  <h4>regionName: <code id="as">""</code></h4>
-  <h4>status: <code id="as">""</code></h4>
-  <h4>timezone: <code id="as">""</code></h4>
-  <h4>zip: <code id="as">""</code></h4>
+  <h4>lat: <code id="latField">""</code></h4>
+  <h4>lon: <code id="lonField">""</code></h4>
+  <h4>org: <code id="orgField">""</code></h4>
+  <h4>query: <code id="queryField">""</code></h4>
+  <h4>region: <code id="regionField">""</code></h4>
+  <h4>regionName: <code id="regionNameField">""</code></h4>
+  <h4>status: <code id="statusField">""</code></h4>
+  <h4>timezone: <code id="timezoneField">""</code></h4>
+  <h4>zip: <code id="zipField">""</code></h4>
 <script>
 
 var xmlHttp = new XMLHttpRequest();
@@ -35,6 +35,7 @@ function httpGet(event) {
 function processRequest(e) {
   if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
     var response = JSON.parse(xmlHttp.responseText);
+
     var asField = document.getElementById('asField');
     asField.innerHTML = response.as;
     var cityField = document.getElementById('cityField');
@@ -45,7 +46,24 @@ function processRequest(e) {
     countryCodeField.innerHTML = response.countryCode;
     var ispField = document.getElementById('ispField');
     ispField.innerHTML = response.isp;
-
+    var latField = document.getElementById('latField');
+    latField.innerHTML = response.lat;
+    var lonField = document.getElementById('lonField');
+    lonField.innerHTML = response.lon;
+    var orgField = document.getElementById('orgField');
+    orgField.innerHTML = response.org;
+    var queryField = document.getElementById('queryField');
+    queryField.innerHTML = response.query;
+    var regionField = document.getElementById('regionField');
+    regionField.innerHTML = response.region;
+    var regionNameField = document.getElementById('regionNameField');
+    regionNameField.innerHTML = response.regionName;
+    var statusField = document.getElementById('statusField');
+    statusField.innerHTML = response.status;
+    var timezoneField = document.getElementById('timezoneField');
+    timezoneField.innerHTML = response.timezone;
+    var zipField = document.getElementById('zipField');
+    zipField.innerHTML = response.zip;
   }
 }
 
