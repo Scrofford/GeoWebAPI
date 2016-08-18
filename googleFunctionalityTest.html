@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpj0rNHkoYtraveabbRftpZcE0x8FB6Cg&callback=initMap"
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpj0rNHkoYtraveabbRftpZcE0x8FB6Cg"
     type="text/javascript">
 </script>
 <script>
@@ -30,11 +30,10 @@ function initialize() {
   var myCenter = new google.maps.LatLng(xmlHttp.lat,xmlHttp.lon);
   var marker = new google.maps.Marker({
     position:myCenter,
-    });
+  });
 
   marker.setMap(map);
 }
-google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>
 </head>
