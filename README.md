@@ -1,3 +1,3 @@
-Goal is to consume data provided by the API at
+Consumes data provided by the API at
 http://ip-api.com/
-Secondary goal is to add in google maps functionality
+then creates a pin with a turtle icon at the users location
