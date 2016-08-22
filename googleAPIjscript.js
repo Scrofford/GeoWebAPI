@@ -47,12 +47,10 @@ function initialize() {
     });
   }
 
-  var features = [
-    {
+  var features = [{
       position: new google.maps.LatLng(currentLat, currentLon),
       type: 'info'
-    }
-  ];
+    }];
 
   for (var i = 0, feature; feature = features[i]; i++) {
     addMarker(feature);
