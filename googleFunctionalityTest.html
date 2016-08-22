@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpj0rNHkoYtraveabbRftpZcE0x8FB6Cg&callback=initMap"
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpj0rNHkoYtraveabbRftpZcE0x8FB6Cg&callback=initialize"
   async defer>
   </script>
   <title>Simple Map</title>
@@ -39,25 +39,51 @@ function processRequest(e) {
     var response = JSON.parse(xmlHttp.responseText);
     currentLat = response.lat;
     currentLon = response.lon;
-    initMap();
-    putMarker();
+    initialize();
   }
 }
 
-function initMap() {
-  var map = new google.maps.Map(document.getElementById("map"), {
-    center: {lat: currentLat, lng: currentLon},
-    zoom: 8
+var map;
+function initialize() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: new google.maps.LatLng(currentLat, currentLon),
+    mapTypeId: 'roadmap'
   });
-}
 
-function putMarker() {
-  var marker = new google.maps.Marker({
-    position: {lat: currentLat, lng: currentLon},
-//    map: map
-  });
-}
+  var iconBase = 'http://www.nonkit.com/smallbasic.files/AnotherTurtle.png';
+  var icons = {
+    info: {
+      icon: iconBase + 'AnotherTurtle.png'
+    }
+  };
 
+  var image = {
+    url: 'https://maxcdn.icons8.com/windows8/PNG/48/Animals/turtle-48.png',
+    size: new google.maps.Size(47, 47),
+    origin: new google.maps.Point(0, 0),
+    anchor: new google.maps.Point(0, 32)
+  };
+
+  function addMarker(feature) {
+    var marker = new google.maps.Marker({
+      position: feature.position,
+      icon: image,
+      map: map
+    });
+  }
+
+  var features = [
+    {
+      position: new google.maps.LatLng(currentLat, currentLon),
+      type: 'info'
+    }
+  ];
+
+  for (var i = 0, feature; feature = features[i]; i++) {
+    addMarker(feature);
+  }
+}
 
 document.getElementById("getButton").addEventListener("click", httpGet);
 xmlHttp.addEventListener("readystatechange", processRequest, false);
