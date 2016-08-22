@@ -1,6 +1,7 @@
 var currentLat = 0;
 var currentLon = 0;
 var xmlHttp = new XMLHttpRequest();
+var map;
 
 function httpGet(event) {
   xmlHttp.open( "GET", "http://ip-api.com/json", true ); // false for synchronous request
@@ -17,7 +18,6 @@ function processRequest(e) {
   }
 }
 
-var map;
 function initialize() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
@@ -47,12 +47,10 @@ function initialize() {
     });
   }
 
-  var features = [
-    {
+  var features = [{
       position: new google.maps.LatLng(currentLat, currentLon),
       type: 'info'
-    }
-  ];
+    }];
 
   for (var i = 0, feature; feature = features[i]; i++) {
     addMarker(feature);
